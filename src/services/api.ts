@@ -10,7 +10,7 @@ export function setupAPIClient(ctx = undefined) {
 
     const api = axios.create({
 
-        baseURL: 'http://localhost:3333',
+        baseURL: 'https://api-hampix.herokuapp.com',
         headers: {
             Authorization: `Bearer ${cookies['@hampix.token']}`
         }
