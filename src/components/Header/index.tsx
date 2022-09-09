@@ -1,7 +1,8 @@
 import { useContext } from 'react';
 import Link from 'next/link';
 import styles from './styles.module.scss';
-
+import Image from 'next/image';
+import logo  from '../../../public/logo.png';
 import { FiLogOut } from 'react-icons/fi';
 
 import { AuthContext } from '../../contexts/AuthContext';
@@ -15,7 +16,7 @@ export function Header() {
             <div className={styles.headerContent}>
 
                 <Link href='/dashboard'>
-                    <img src="/logo.png" width={190} height={50}  />
+                    <Image src={logo} width={190} height={50} alt="logo" />
                 </Link>
 
                 <nav className={styles.menuNav}>
