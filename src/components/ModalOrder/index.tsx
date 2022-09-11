@@ -1,6 +1,6 @@
 import Modal from 'react-modal';
 import styles from './styles.module.scss';
-
+import { formatPrice } from '../../utils/format';
 import { FiX } from 'react-icons/fi';
 
 import { OrderItemProps } from '../../pages/dashboard';
@@ -15,6 +15,12 @@ interface ModalOrderProps {
 }
 
 export function ModalOrder({ isOpen, onRequestClose, order, handleFinishOrder }: ModalOrderProps) {
+
+    const total = formatPrice(
+        order.reduce((sumTotal, item) => {
+            return sumTotal += parseFloat(item.product.price) * item.amount;
+        }, 0)
+    )
 
     const customStyles = {
         content: {
@@ -61,16 +67,17 @@ export function ModalOrder({ isOpen, onRequestClose, order, handleFinishOrder }:
                 </span>
 
                 {order.map(item => (
-
                     <section key={item.id} className={styles.containerItem}>
 
                         <span>{item.amount} - <strong>{item.product.name}</strong></span>
                         <span className={styles.description}>{item.product.description}</span>
-
+                        
                     </section>
-
                 ))}
 
+                <span className={styles.table}>Total</span>
+                <span className={styles.description}>{total}</span>
+                
                 <button 
                     className={styles.buttonOrder} 
                     onClick={() => handleFinishOrder(order[0].order_id)}
